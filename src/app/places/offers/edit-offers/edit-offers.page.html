@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button  *ngIf="isLoadable" defaultHref="/places/tabs/offers/{{place.id}}"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit Offers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!isLoadable"  class="ion-text-center" style="margin-top: 200px;">
+    <ion-spinner name="crescent" color="danger"></ion-spinner>
+  </div>
+  <div *ngIf="isLoadable">
+  <form #f="ngForm" (ngSubmit)="onEditConfirm(f)">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-item>
+           <ion-label position="floating">Title</ion-label>
+          <ion-input  name="title" required [(ngModel)]="titleNg" #title="ngModel"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!title.valid && title.touched" lines="none">
+          <ion-label>Title is Mandatory</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3">
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-textarea name="description" minlength="10" maxlength="100" required [(ngModel)]="descNg" #description="ngModel"></ion-textarea>
+        </ion-item>
+        <ion-item *ngIf="!description.valid && description.touched" lines="none">
+          <ion-label>Description must be between 10 to 100</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-sm="6" offset-sm="3 ">
+        <ion-button color="primary" expand="block" type="submit">Save Details</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </form>
+  </div>
+</ion-content>

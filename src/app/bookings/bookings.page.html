@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Bookings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="!isLoadable" class="ion-text-center" style="margin-top: 200px;">
+    <ion-spinner name="crescent" color="danger"></ion-spinner>
+  </div>
+  <ion-grid *ngIf="isLoadable">
+    <ion-row>
+      <ion-col *ngIf="!bookings || bookings.length<=0">
+        <b><p style="text-align: center;">No Bookings yet... Come back later</p></b>
+      </ion-col>
+      <ion-col size-md="8" offset-md="2" *ngIf="bookings && bookings.length>0">
+        <ion-list>
+          <ion-item-sliding *ngFor="let booking of bookings" #bookingSlideReference>
+          <ion-item>
+              <ion-avatar slot="start">
+                <ion-img [src]="booking.placeImage"></ion-img>
+              </ion-avatar>
+               <ion-label>
+                 <h2>{{booking.placeTitle}}</h2>
+                 <p>{{booking.guestNumber}}</p>
+               </ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-item-option color="danger" (click)="onBookingCancel(booking.id, bookingSlideReference)">
+               <ion-icon name="trash" slot="icon-only"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

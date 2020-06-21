@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/places/tabs/offers"></ion-back-button>
+    </ion-buttons>
+    <ion-title>New Offers</ion-title>
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #f="ngForm" (ngSubmit)="onCreateOffer()" id="form1"> 
+    <ion-grid>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+              <ion-label position="floating">Title</ion-label>
+              <ion-input type="text" name="title" autocomplete autocorrect required ngModel></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Description</ion-label>
+            <ion-textarea rows="3" name="description" minlength="10" required ngModel #description="ngModel"></ion-textarea>
+        </ion-item>
+        <ion-item *ngIf="!description.valid && description.touched" lines="none">
+          <ion-label style="font-size: medium;">Description must be between 1 to 180 characters</ion-label>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <ion-item>
+            <ion-label position="floating">Price</ion-label>
+            <ion-input type="number" name="price" required ngModel></ion-input>
+        </ion-item>
+        </ion-col>
+      </ion-row>
+       <ion-row>
+         <ion-col size-sm="3" offset-sm="3">
+           <ion-item>
+           <ion-label position="floating">Available from</ion-label>
+           <ion-datetime min="2020-01-01" name="dateFrom" max="2025-12-31" required ngModel></ion-datetime>
+           </ion-item>
+         </ion-col>
+         <ion-col size-sm="3">
+           <ion-item>
+          <ion-label position="floating">Available to</ion-label>
+          <ion-datetime min="2020-01-02" max="2025-12-31" name="dateTo" required ngModel></ion-datetime>
+          </ion-item>
+          
+         </ion-col>
+       </ion-row>
+  
+      <!-- <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <app-image-pickers (imagePick)="onImagePick($event)"></app-image-pickers>
+        </ion-col>
+
+      </ion-row>
+    -->
+     <!-- <input type="file" #imageFile class="imageFileHtml" name="imageFile"  ngModel>-->
+     <!--<ion-input type="text" name="image" class="imageString" *ngIf="flag" [(ngModel)]="imageTemp" ngModel></ion-input>-->
+      <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+      
+           <ion-button color="success" expand="block" type="submit" [disabled]="!f.valid || !onDateCheck()">Submit Offer</ion-button> <!--expand will place width of button to entire column-->
+          
+        </ion-col>
+      </ion-row>
+     <!-- <ion-row>
+        <ion-col size-sm="6" offset-sm="3">
+          <app-location-picker></app-location-picker>
+        </ion-col>
+      </ion-row>-->
+
+     
+    </ion-grid>
+  
+    </form>
+</ion-content>
